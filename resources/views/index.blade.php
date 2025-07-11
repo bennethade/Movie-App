@@ -9,187 +9,31 @@
             <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">Popular Movies</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
+                @foreach ($popularMovies as $movie)
+                    {{-- <x-movie-card :movie="$movie" :genres="$genres"/> --}}
+
+                    <div class="mt-8">
+                        <a href="{{ route('movies.show',$movie['id']) }}">
+                            <img src="{{ 'https://image.tmdb.org/t/p/w500' . $movie['poster_path']}}" alt="{{ $movie['title'] }}" class="hover:opacity-75 transition ease-in-out duration-150">
+                        </a>
+                        <div class="mt-2">
+                            <a href="{{ route('movies.show',$movie['id']) }}" class="text-lg mt2 hover:text-gray-300">{{ $movie['title'] }}</a>
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
+                                <span class="ml-1">{{ $movie['vote_average'] * 10 }}%</span>
+                                <span class="mx-2">|</span>
+                                <span>{{ date('d M, Y', strtotime($movie['release_date'])) }}</span>
+                            </div>
+                            
+                            <div class="text-gray-400 text-sm">
+                                @foreach ($movie['genre_ids'] as $genre)
+                                    {{ $genres->get($genre) }}@if (!$loop->last),@endif
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                
+
+                @endforeach
             </div>
         </div>  <!-- END POPULAR MOVIES -->
 
@@ -198,197 +42,38 @@
             <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">Now Playing</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
+                @foreach ($nowPlayingMovies as $movie)
+                    {{-- <x-movie-card :movie="$movie" :genres="$genres"/> --}}
+
+                    <div class="mt-8">
+                        <a href="{{ route('movies.show',$movie['id']) }}">
+                            <img src="{{ 'https://image.tmdb.org/t/p/w500' . $movie['poster_path']}}" alt="{{ $movie['title'] }}" class="hover:opacity-75 transition ease-in-out duration-150">
+                        </a>
+                        <div class="mt-2">
+                            <a href="{{ route('movies.show',$movie['id']) }}" class="text-lg mt2 hover:text-gray-300">{{ $movie['title'] }}</a>
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
+                                <span class="ml-1">{{ $movie['vote_average'] * 10 }}%</span>
+                                <span class="mx-2">|</span>
+                                <span>{{ date('d M, Y', strtotime($movie['release_date'])) }}</span>
+                            </div>
+                            
+                            <div class="text-gray-400 text-sm">
+                                @foreach ($movie['genre_ids'] as $genre)
+                                    {{ $genres->get($genre) }}@if (!$loop->last),@endif
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <a href="">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXxaHqLwrzvVQ58G9ozvTBlL-XiYe4QdPZwAD7ZLFLgJtgMwatpFgp36N5nPZpD79cvTdeUHWPDBYAHJrReZREfetUXY2FMtuX5JMo9VRu1ZXQ_qIw7SoI4ywG_2cs293g902AvHT_CuE/s1600/Make+a+Movie+Poster+Style+Photo+Effect+in+Photoshop.jpg" alt="last night" class="hover:opacity-75 transition ease-in-out duration-150">
-                    </a>
-                    <div class="mt-2">
-                        <a href="" class="text-lg mt2 hover:text-gray-300">Last Night</a>
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            <span><img src="{{ asset('images/star.png') }}" alt="last night" class="fill-current w-4"></span>
-                            <span class="ml-1">85%</span>
-                            <span class="mx-2">|</span>
-                            <span>Feb 28, 2020</span>
-                        </div>
-                        
-                        <div class="text-gray-400 text-sm">
-                            Action, Thriller, Comedy
-                        </div>
-                    </div>
-                </div>
+
+                @endforeach
+                
                 
             </div>
         </div>  <!-- END NOW PLAYING -->
 
-
-
     </div>
     
-
-
-
 
 
 

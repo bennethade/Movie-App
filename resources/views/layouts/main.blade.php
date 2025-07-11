@@ -16,13 +16,13 @@
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-6">
             <ul class="flex flex-col md:flex-row items-center">
                 <li>
-                    <a href="">
+                    <a href="/">
                         <img src="{{ asset('images/logo.png') }}" class="w-30" viewBox="0 0 96 24" fill="none" alt="">
                     </a>
                 </li>
 
                 <li class="md:ml-16 mt-3 md:mt-0">
-                    <a href="" class="hover:text-gray-300">Movies</a>
+                    <a href="{{ route('movies.index') }}" class="hover:text-gray-300">Movies</a>
                 </li>
 
                 <li class="md:ml-6 mt-3 md:mt-0">
