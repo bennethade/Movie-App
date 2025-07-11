@@ -1,7 +1,6 @@
 <?php
 
-use App\Livewire\Auth\Register;
-use Livewire\Livewire;
+use Livewire\Volt\Volt;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
@@ -12,7 +11,7 @@ test('registration screen can be rendered', function () {
 });
 
 test('new users can register', function () {
-    $response = Livewire::test(Register::class)
+    $response = Volt::test('auth.register')
         ->set('name', 'Test User')
         ->set('email', 'test@example.com')
         ->set('password', 'password')
