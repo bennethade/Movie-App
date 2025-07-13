@@ -19,19 +19,21 @@
                         @endforeach
                     </span>
                 </div>
-                <p class="text-gray-300 mt-8">
+                <p class="text-gray-300 mt-8" style="text-align: justify">
                     {{ $movie['overview'] }}
                 </p>
 
                 <div class="mt-12">
-                    <h4 class="text-white font-semibold">Featured Cast</h4>
+                    <h4 class="text-white font-semibold">Featured Crew</h4>
                     <div class="flex mt-4">
                         @foreach ($movie['credits']['crew'] as $crew)
-                            @if ($loop->index < 2)
+                            @if ($loop->index < 5)
                                 <div class="mr-8">
                                     <div>{{ $crew['name'] }}</div>
                                     <div class="text-sm text-gray-400">{{ $crew['job'] }}</div>
-                                </div> 
+                                </div>
+                            @else
+                                @break
                             @endif
                         @endforeach
                     </div>
@@ -61,7 +63,11 @@
 
                             <div class="modal-body px-8 py-8">
                                 <div class="responsive-container overflow-hidden relative" style="padding-top: 56.25%">
-                                    <iframe width="560" height="315" class="responsive-iframe absolute top-0 left-0 w-full h-full" src="http://www.youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}" style="border: 0;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    @if (!empty($movie['videos']['results'][0]['key'] ))
+                                        <iframe width="560" height="315" class="responsive-iframe absolute top-0 left-0 w-full h-full" src="http://www.youtube.com/embed/{{ $movie['videos']['results'][0]['key'] }}" style="border: 0;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    @else
+                                        <p>Triller not available</p>
+                                    @endif
                                 </div>
                             </div>
 
@@ -84,16 +90,18 @@
                 @foreach ($movie['credits']['cast'] as $cast)
                     @if ($loop->index < 5)
                         <div class="mt-8">
-                            {{-- <a href=""> --}}
+                            <a href="{{ route('actors.show', $cast['id']) }}">
                                 <img src="{{ 'https://image.tmdb.org/t/p/w300' . $cast['profile_path']}}" alt="" class="hover:opacity-75 transition ease-in-out duration-150" style="width: 24rem">
-                            {{-- </a> --}}
+                            </a>
                             <div class="mt-2">
-                                <a href="" class="text-lg mt2 hover:text-gray-300">{{ $cast['name'] }}</a>
+                                <a href="{{ route('actors.show', $cast['id']) }}" class="text-lg mt2 hover:text-gray-300">{{ $cast['name'] }}</a>
                                 <div class="flex items-center text-gray-400 text-sm mt-1">
                                     <a href="" class="text-lg mt2 hover:text-gray-300">{{ $cast['character'] }}</a>
                                 </div>
                             </div>
                         </div>
+                    @else
+                        @break
                     @endif
                 @endforeach              
                 
@@ -120,6 +128,8 @@
                                 <img src="{{ 'https://image.tmdb.org/t/p/w300' . $image['file_path']}}" alt="last night" class="hover:opacity-75 w-150 h-60">
                             </a>
                         </div>
+                    @else
+                        @break
                     @endif
                 @endforeach
             </div>

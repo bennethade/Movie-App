@@ -30,11 +30,11 @@
                 </li>
 
                 <li class="md:ml-6 mt-3 md:mt-0">
-                    <a href="" class="hover:text-gray-300">TV Shows</a>
+                    <a href="{{ route('tv.index') }}" class="hover:text-gray-300">TV Shows</a>
                 </li>
 
                 <li class="md:ml-6 mt-3 md:mt-0">
-                    <a href="" class="hover:text-gray-300">Actors</a>
+                    <a href="{{ route('actors.index') }}" class="hover:text-gray-300">Actors</a>
                 </li>
 
                 <li class="md:ml-6 mt-3 md:mt-0">
@@ -62,8 +62,8 @@
 
                         x-on:keydown.window.escape="open = false"
                         type="text"
-                        placeholder="Search"
-                        class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-1 pr-10 focus:outline-none focus:shadow-outline"
+                        placeholder="Search (Press '/' to start)"
+                        class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-1 pr-10 focus:outline-none focus:shadow-outline text-sm"
                     >
 
                     <!-- Left-side Search Icon -->
@@ -117,6 +117,7 @@
     </nav>
 
     @yield('content')
+    @yield('scripts')
 
 <!-- Axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

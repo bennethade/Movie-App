@@ -71,7 +71,7 @@
         </div>  <!-- END POPULAR MOVIES -->
 
 
-        <div class="now-playing-movies py-14">
+        <div class="now-playing-movies py-6">
             <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">Now Playing</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">

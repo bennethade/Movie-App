@@ -97,7 +97,7 @@ class MoviesController extends Controller
         });
 
 
-        return view('index', $data, [
+        return view('movies.index', $data, [
                 'genres' => $genres
             ]
         );
@@ -129,7 +129,7 @@ class MoviesController extends Controller
             ->get('https://api.themoviedb.org/3/movie/' . $id . '?append_to_response=credits,videos,images')
             ->json();
 
-        return view('show', $data);
+        return view('movies.show', $data);
     }
 
 
@@ -165,7 +165,7 @@ class MoviesController extends Controller
         });
 
 
-        return view('top_rated', $data, [
+        return view('movies.top_rated', $data, [
                 'genres' => $genres
             ]
         );
